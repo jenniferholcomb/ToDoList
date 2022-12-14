@@ -15,16 +15,31 @@ namespace ToDoList.Controllers
     }
 
     [HttpGet("/items/new")]
-    public ActionResult CreateForm()
+    // changed from CreateForm() to New() to follow REST
+    public ActionResult New()
     {
       return View();
     }
 
     [HttpPost("/items")]
-    public ActionResult Create(string description)
+    public ActionResult Create(string description, string notes)
     {
-      Item myItem = new Item(description);
+      Item myItem = new Item(description, notes);
       return RedirectToAction("Index");
+    }
+
+    [HttpPost("/items/delete")]
+    public ActionResult DeleteAll()
+    {
+      Item.ClearAll();
+      return View();
+    }
+
+    [HttpGet("items/{id}")]
+    public ActionResult Show(int id)
+    {
+      Item foundItem = Item.Find(id);
+      return View(foundItem);
     }
 
   }
