@@ -18,7 +18,7 @@ namespace ToDoList
       app.UseRouting();
 
       app.MapControllerRoute(
-        name: "default";
+        name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}"
       );
 
