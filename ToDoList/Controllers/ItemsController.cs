@@ -14,35 +14,47 @@ namespace ToDoList.Controllers
       return View(allItems);
     }
 
-    [HttpGet("/items/new")]
+    [HttpGet("/categories/{categoryId}/items/new")]
     // changed from CreateForm() to New() to follow REST
-    public ActionResult New()
+    public ActionResult New(int categoryId)
     {
-      return View();
+      Category category = Category.Find(categoryId);
+      return View(category);
     }
 
-    [HttpPost("/items")]
-    public ActionResult Create(string description, string notes)
+    [HttpGet("/categories/{categoryId}/items/{itemId}")]
+    public ActionResult Show(int categoryId, int itemId)
     {
-      Item myItem = new Item(description, notes);
-      return RedirectToAction("Index");
+      Item item = Item.Find(itemId);
+      Category category = Category.Find(categoryId);
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      model.Add("item", item);
+      model.Add("category", category);
+      return View(model);
     }
 
-    [HttpPost("/items/delete")]
-    public ActionResult DeleteAll()
+    [HttpGet("/categories/{categoryId}/items/{itemId}/edit")]
+    public ActionResult Edit(int categoryId, int itemId)
     {
-      Item.ClearAll();
-      return View();
+      Item item = Item.Find(itemId);
+      Category category = Category.Find(categoryId);
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      model.Add("item", item);
+      model.Add("category", category);      
+      return View(model);
     }
 
-    [HttpGet("items/{id}")]
-    public ActionResult Show(int id)
+    [HttpPost("/categories/{categoryId}/items/{itemId}")]
+    public ActionResult Update(int categoryId, int itemId, string editDescription)
     {
-      Item foundItem = Item.Find(id);
-      return View(foundItem);
+      Item item = Item.Find(itemId);
+      item.Description = editDescription;
+      Category category = Category.Find(categoryId);
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      model.Add("item", item);
+      model.Add("category", category);
+      return View("Show", model);
     }
-
   }
 }
 
-// comment 

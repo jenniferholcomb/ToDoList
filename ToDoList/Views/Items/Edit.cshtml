@@ -1,0 +1,11 @@
+@{
+  Layout = "_Layout";
+}
+
+<form action='/categories/@Model["category"].Id/items/@Model["item"].Id' method="post">
+  <input id="categoryId" name="categoryId" type="hidden" value='@Model["category"].Id' >
+  <input id="itemId" name="itemId" type="hidden" value='@Model["item"].Id'>
+  <label for="editDescription">Edit Description</label>
+  <input id="editDescription" name="editDescription" type="text">
+  <button type='submit'>Add Item</button>
+</form>

@@ -10,12 +10,11 @@
       crossorigin="anonymous">
   </head>
   <body>
-    <form action="/items" method="post">
-      <label for="description">Add a new item</label>
-      <input id="description" name="description" type="text">
-      <label for="notes">Add note for item</label>
-      <input id="notes" name="notes" type="text">
-      <button type="submit">Submit</button>
-    </form>
+  <form action="/categories/@Model.Id/items" method="post">
+    <input id="categoryId" name="categoryId" type="hidden" value="@Model.Id">
+    <label for="itemDescription">Item Description</label>
+    <input id="itemDescription" name="itemDescription" type="text">
+    <button type='submit'>Add Item</button>
+  </form>
   </body>
 </html>

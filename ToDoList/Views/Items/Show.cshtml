@@ -11,9 +11,11 @@
   </head>
   <body>
     <h1>To Do List Item Details:</h1>
-    <h2>@Model.Description</h2>
-    <p>Notes @Model.Notes</p>
-    <a href='/items/new'>Add another item</a>
-    <a href='/items'>View all items</a>
+    <h2>@Model["item"].Description</h2>
+    <h3>Category: @Model["category"].Name</h3>
+
+    <a href='/categories/@Model["category"].Id/items/new'>Add another item</a>
+    <a href='/categories'>View all categories</a>
+    <a href='/categories/@Model["category"].Id/items/@Model["item"].Id/edit'>Edit Item</a>
   </body>
 </html>
